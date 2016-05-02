@@ -1,0 +1,5 @@
+suites:
+    stopwatch_plugin_suite:
+        namespace: Http\Client\Common\Plugin
+        psr4_prefix: Http\Client\Common\Plugin
+formatter.name: pretty

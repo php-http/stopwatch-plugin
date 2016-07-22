@@ -58,6 +58,6 @@ final class StopwatchPlugin implements Plugin
      */
     private function getStopwatchEventName(RequestInterface $request)
     {
-        return sprintf('%s %s', $request->getMethod(), $request->getRequestTarget());
+        return sprintf('%s %s', $request->getMethod(), $request->getUri()->__toString());
     }
 }

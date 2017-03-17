@@ -16,6 +16,7 @@ use Symfony\Component\Stopwatch\Stopwatch;
 final class StopwatchPlugin implements Plugin
 {
     const CATEGORY = 'php_http.request';
+    const HEADER = 'X-Duration';
 
     /**
      * @var Stopwatch
@@ -39,11 +40,11 @@ final class StopwatchPlugin implements Plugin
         $this->stopwatch->start($eventName, self::CATEGORY);
 
         return $next($request)->then(function (ResponseInterface $response) use ($eventName) {
-            $this->stopwatch->stop($eventName, self::CATEGORY);
+            $event = $this->stopwatch->stop($eventName);
 
-            return $response;
+            return $response->withHeader(self::HEADER, $event->getDuration());
         }, function (Exception $exception) use ($eventName) {
-            $this->stopwatch->stop($eventName, self::CATEGORY);
+            $this->stopwatch->stop($eventName);
 
             throw $exception;
         });

@@ -12,7 +12,7 @@
     ],
     "require": {
         "php": ">=5.4",
-        "symfony/stopwatch": "^2.7|^3.0",
+        "symfony/stopwatch": "^2.7 || ^3.0 || ^4.0",
         "php-http/client-common": "^1.1"
     },
     "require-dev": {

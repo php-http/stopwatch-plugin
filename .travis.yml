@@ -32,7 +32,7 @@ matrix:
         - php: 5.4
           env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" COVERAGE=true TEST_COMMAND="composer test-ci" SYMFONY_VERSION=2.7.*
         - php: 7.1
-          env: SYMFONY_VERSION=4.0.*
+          env: SYMFONY_VERSION=4.0.*@dev
     exclude:
         - php: 5.4
           env: SYMFONY_VERSION=3.0.*

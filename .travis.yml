@@ -27,13 +27,10 @@ matrix:
         - php: 5.6
         - php: 7.0
         - php: 7.1
-          env: SYMFONY_VERSION=3.0.*
+          env: DEPENDENCIES="symfony/lts:^3"
         - php: 7.1
           env: DEPENDENCIES="dev" SYMFONY_VERSION=4.0.*
         - php: hhvm
-    exclude:
-        - php: 5.4
-          env: SYMFONY_VERSION=3.0.*
     allow_failures:
         - php: 7.1
           env: DEPENDENCIES="dev" SYMFONY_VERSION=4.0.*
@@ -42,6 +39,7 @@ before_install:
     - travis_retry composer self-update
     - if [ "$DEPENDENCIES" = "minimum" ]; then COMPOSER_FLAGS="--prefer-stable --prefer-lowest"; fi;
     - if [ "$DEPENDENCIES" = "dev" ]; then composer config minimum-stability dev; fi;
+    - if [[ $DEPENDENCIES == *"/"* ]]; then composer require --no-update $DEPENDENCIES; fi;
 
 install:
     - travis_retry composer require symfony/symfony:${SYMFONY_VERSION} --no-update

@@ -6,13 +6,6 @@ cache:
     directories:
         - $HOME/.composer/cache/files
 
-php:
-    - 5.4
-    - 5.5
-    - 5.6
-    - 7.0
-    - hhvm
-
 env:
     global:
         - TEST_COMMAND="composer test"
@@ -28,20 +21,38 @@ branches:
 matrix:
     fast_finish: true
     include:
+        # Test stable versions
         - php: 5.4
-          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" COVERAGE=true TEST_COMMAND="composer test-ci" SYMFONY_VERSION=2.7.*
-    exclude:
-        - php: 5.4
-          env: SYMFONY_VERSION=3.0.*
+          env: DEPENDENCIES=minimum COVERAGE=true TEST_COMMAND="composer test-ci" SYMFONY_VERSION="2.7.* henrikbjorn/phpspec-code-coverage:^1.0"
+        - php: 5.5
+        - php: 5.6
+        - php: 7.0
+
+        # Test latest versions:
+        - php: 7.1
+          env: DEPENDENCIES="symfony/lts:^3" SYMFONY_VERSION=3.0.*
+        - php: 7.1
+          env: DEPENDENCIES="dev" SYMFONY_VERSION=4.0.*
+
+        # Test alternative runtimes:
+        - php: hhvm
+
+    allow_failures:
+        - php: 7.1
+          env: DEPENDENCIES="dev" SYMFONY_VERSION=4.0.*
 
 before_install:
     - travis_retry composer self-update
+    - if [ "$DEPENDENCIES" = "minimum" ]; then COMPOSER_FLAGS="--prefer-stable --prefer-lowest"; fi;
+    - if [ "$DEPENDENCIES" = "dev" ]; then composer config minimum-stability dev; fi;
+    - if [[ $DEPENDENCIES == *"/"* ]]; then composer require --no-update $DEPENDENCIES; fi;
 
 install:
     - travis_retry composer require symfony/symfony:${SYMFONY_VERSION} --no-update
     - travis_retry composer update ${COMPOSER_FLAGS} --prefer-dist --no-interaction
 
 script:
+    - composer validate --strict --no-check-lock
     - $TEST_COMMAND
 
 after_success:

@@ -23,7 +23,7 @@ matrix:
     include:
         # Test stable versions
         - php: 5.4
-          env: DEPENDENCIES=minimum COVERAGE=true TEST_COMMAND="composer test-ci" SYMFONY_VERSION="2.7.* henrikbjorn/phpspec-code-coverage^1.0"
+          env: DEPENDENCIES=minimum COVERAGE=true TEST_COMMAND="composer test-ci" SYMFONY_VERSION="2.7.* henrikbjorn/phpspec-code-coverage:^1.0"
         - php: 5.5
         - php: 5.6
         - php: 7.0

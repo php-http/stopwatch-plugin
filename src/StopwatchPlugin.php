@@ -13,7 +13,7 @@ use Symfony\Component\Stopwatch\Stopwatch;
  *
  * @author Joel Wurtz <joel.wurtz@gmail.com>
  */
-final class StopwatchPlugin implements Plugin
+final class StopwatchPlugin extends VersionBridgePlugin
 {
     const CATEGORY = 'php_http.request';
 
@@ -30,10 +30,7 @@ final class StopwatchPlugin implements Plugin
         $this->stopwatch = $stopwatch;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function handleRequest(RequestInterface $request, callable $next, callable $first)
+    protected function doHandleRequest(RequestInterface $request, callable $next, callable $first)
     {
         $eventName = $this->getStopwatchEventName($request);
         $this->stopwatch->start($eventName, self::CATEGORY);

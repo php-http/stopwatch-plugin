@@ -40,9 +40,6 @@ matrix:
         - php: 7.2
           env: DEPENDENCIES="dunglas/symfony-lock:^4"
 
-        - php: 7.2
-          env: DEPENDENCIES="php-http/client-common:^1.9"
-
           # Latest commit to master
         - php: 7.2
           env: STABILITY="dev"

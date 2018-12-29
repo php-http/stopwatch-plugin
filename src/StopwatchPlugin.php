@@ -17,6 +17,8 @@ final class StopwatchPlugin implements Plugin
 {
     const CATEGORY = 'php_http.request';
 
+    use VersionBridgePlugin;
+
     /**
      * @var Stopwatch
      */
@@ -30,10 +32,7 @@ final class StopwatchPlugin implements Plugin
         $this->stopwatch = $stopwatch;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function handleRequest(RequestInterface $request, callable $next, callable $first)
+    protected function doHandleRequest(RequestInterface $request, callable $next, callable $first)
     {
         $eventName = $this->getStopwatchEventName($request);
         $this->stopwatch->start($eventName, self::CATEGORY);

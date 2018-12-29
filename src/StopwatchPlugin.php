@@ -16,6 +16,7 @@ use Symfony\Component\Stopwatch\Stopwatch;
 final class StopwatchPlugin implements Plugin
 {
     const CATEGORY = 'php_http.request';
+
     use VersionBridgePlugin;
 
     /**

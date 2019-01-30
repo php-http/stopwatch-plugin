@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.2.0 - 2019-01-30
+
+### Added
+
+- Support for php-http/client-common 2.0
 
 ## 1.1.0 - 2017-11-29
 

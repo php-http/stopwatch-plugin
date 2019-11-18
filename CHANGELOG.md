@@ -1,5 +1,17 @@
 # Change Log
 
+## 1.3.0 - unreleased
+
+### Added
+
+- Support for Symfony 5
+- Support PHP 7.3
+
+### Removed
+
+- PHP 5 and PHP 7.0 support
+- Symfony 2 support (disfunctional because php-http/client-commons no longer supports Symfony 2 anyways)
+
 ## 1.2.0 - 2019-01-30
 
 ### Added

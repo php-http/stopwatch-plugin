@@ -19,29 +19,23 @@ matrix:
           # Test with lowest dependencies
         - php: 7.1
           env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" SYMFONY_DEPRECATIONS_HELPER="weak"
-        - php: 5.4
-          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" SYMFONY_DEPRECATIONS_HELPER="weak"
 
           # Test the latest stable release
-        - php: 5.4
-        - php: 5.5
-        - php: 5.6
-        - php: 7.0
         - php: 7.1
         - php: 7.2
-          env: COVERAGE=true TEST_COMMAND="composer test-ci" DEPENDENCIES="henrikbjorn/phpspec-code-coverage:^1.0"
         - php: 7.3
+          env: COVERAGE=true TEST_COMMAND="composer test-ci" DEPENDENCIES="henrikbjorn/phpspec-code-coverage:^1.0"
 
           # Force some major versions of Symfony
-        - php: 7.2
-          env: DEPENDENCIES="dunglas/symfony-lock:^2"
-        - php: 7.2
+        - php: 7.3
           env: DEPENDENCIES="dunglas/symfony-lock:^3"
-        - php: 7.2
+        - php: 7.3
           env: DEPENDENCIES="dunglas/symfony-lock:^4"
+        - php: 7.3
+          env: SYMFONY_REQUIRE="5"
 
           # Latest commit to master
-        - php: 7.2
+        - php: 7.3
           env: STABILITY="dev"
 
     allow_failures:

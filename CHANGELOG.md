@@ -1,5 +1,15 @@
 # Change Log
 
+## 1.4.0 - 2020-11-30
+
+### Added
+
+- Support PHP 8
+
+### Removed
+
+- Dropped support for PHP < 7.3
+
 ## 1.3.0 - 2019-12-27
 
 ### Added

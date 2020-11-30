@@ -17,15 +17,14 @@ matrix:
     fast_finish: true
     include:
           # Test with lowest dependencies
-        - php: 7.1
+        - php: 7.3
           env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" SYMFONY_DEPRECATIONS_HELPER="weak"
 
           # Test the latest stable release
-        - php: 7.1
-        - php: 7.2
         - php: 7.3
-          env: COVERAGE=true TEST_COMMAND="composer test-ci" DEPENDENCIES="henrikbjorn/phpspec-code-coverage:^1.0"
+        - php: 7.4
         - php: 8.0snapshot
+          env: COVERAGE=true TEST_COMMAND="composer test-ci" DEPENDENCIES="henrikbjorn/phpspec-code-coverage:^1.0"
 
           # Force some major versions of Symfony
         - php: 7.3
@@ -36,7 +35,7 @@ matrix:
           env: SYMFONY_REQUIRE="5"
 
           # Latest commit to master
-        - php: 7.3
+        - php: 8.0snapshot
           env: STABILITY="dev"
 
     allow_failures:

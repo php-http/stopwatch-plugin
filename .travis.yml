@@ -25,6 +25,7 @@ matrix:
         - php: 7.2
         - php: 7.3
           env: COVERAGE=true TEST_COMMAND="composer test-ci" DEPENDENCIES="henrikbjorn/phpspec-code-coverage:^1.0"
+        - php: 8.0snapshot
 
           # Force some major versions of Symfony
         - php: 7.3

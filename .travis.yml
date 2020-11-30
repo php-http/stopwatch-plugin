@@ -23,7 +23,6 @@ matrix:
           # Test the latest stable release
         - php: 7.3
         - php: 7.4
-          env: COVERAGE=true TEST_COMMAND="composer test-ci"
         - php: 8.0snapshot
 
           # Force some major versions of Symfony

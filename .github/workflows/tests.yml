@@ -1,0 +1,99 @@
+name: tests
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  latest:
+    name: PHP ${{ matrix.php }} Latest with Symfony ${{ matrix.symfony-require }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['7.3', '7.4', '8.0']
+        symfony-require: ['*']
+        include:
+          - php: '7.4'
+            symfony-require: 3.4.*
+          - php: '7.4'
+            symfony-require: 4.4.*
+          - php: '8.0'
+            symfony-require: 5.4.*
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: composer:v2
+          coverage: none
+
+      - name: Composer validate
+        run: composer validate --strict --no-check-lock
+
+      - name: Globally install symfony/flex
+        if: matrix.symfony-require != '*'
+        run: composer global require --no-progress --no-scripts --no-plugins symfony/flex
+
+      - name: Install dependencies
+        run: composer update --prefer-dist --no-interaction --no-progress
+
+      - name: Execute tests
+        run: composer test
+
+  lowest:
+    name: PHP ${{ matrix.php }} Lowest
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['7.3']
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: composer:v2
+          coverage: none
+
+      - name: Install dependencies
+        run: composer update --prefer-dist --prefer-stable --prefer-lowest --no-interaction --no-progress
+
+      - name: Execute tests
+        run: composer test
+
+  coverage:
+    name: Code Coverage
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+          tools: composer:v2
+          coverage: xdebug
+
+      - name: Install dependencies
+        run: |
+          composer require "friends-of-phpspec/phpspec-code-coverage:^6.1.0" --no-interaction --no-update
+          composer update --prefer-dist --no-interaction --no-progress
+
+      - name: Execute tests
+        run: composer test-ci
+
+      - name: Upload coverage
+        run: |
+          wget https://scrutinizer-ci.com/ocular.phar
+          php ocular.phar code-coverage:upload --format=php-clover build/coverage.xml

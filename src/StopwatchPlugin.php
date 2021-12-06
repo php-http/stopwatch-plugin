@@ -24,9 +24,6 @@ final class StopwatchPlugin implements Plugin
      */
     private $stopwatch;
 
-    /**
-     * @param Stopwatch $stopwatch
-     */
     public function __construct(Stopwatch $stopwatch)
     {
         $this->stopwatch = $stopwatch;
@@ -50,8 +47,6 @@ final class StopwatchPlugin implements Plugin
 
     /**
      * Generates the event name.
-     *
-     * @param RequestInterface $request
      *
      * @return string
      */

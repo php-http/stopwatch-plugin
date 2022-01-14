@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd" bootstrap="./vendor/autoload.php" colors="true" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true">
+  <coverage>
+    <include>
+      <directory>./</directory>
+    </include>
+    <exclude>
+      <directory>./Resources</directory>
+      <directory>./tests</directory>
+      <directory>./vendor</directory>
+    </exclude>
+  </coverage>
+  <php>
+    <env name="SHELL_VERBOSITY" value="-1"/>
+  </php>
+  <testsuites>
+    <testsuite name="StopwatchPlugin unit tests">
+      <directory suffix="Test.php">./tests/Unit</directory>
+    </testsuite>
+  </testsuites>
+</phpunit>

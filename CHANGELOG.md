@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.4.1 - 2022-01-14
+
+- Support Symfony 6
+
 ## 1.4.0 - 2020-11-30
 
 ### Added

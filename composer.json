@@ -16,7 +16,7 @@
         "php-http/client-common": "^1.9 || ^2.0"
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^5.3",
+        "symfony/phpunit-bridge": "^6.4.1",
         "guzzlehttp/psr7": "^2.1"
     },
     "autoload": {

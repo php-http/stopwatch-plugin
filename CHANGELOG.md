@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.5.0
+
+- Support Symfony 8
+- Test with PHP 8.5
+- Remove support for PHP < 8.1
+
 ## 1.4.2 - 2023-12-05
 
 - Support Symfony 7

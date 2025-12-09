@@ -31,9 +31,12 @@ final class StopwatchPlugin implements Plugin
     }
 
     /**
+     * @param callable(RequestInterface): Promise $next  Next middleware in the chain, the request is passed as the first argument
+     * @param callable(RequestInterface): Promise $first First middleware in the chain, used to restart a request
+     *
      * @return Promise Resolves a PSR-7 Response or fails with an Http\Client\Exception (The same as HttpAsyncClient)
      */
-    protected function doHandleRequest(RequestInterface $request, callable $next, callable $first)
+    protected function doHandleRequest(RequestInterface $request, callable $next, callable $first): Promise
     {
         $eventName = $this->getStopwatchEventName($request);
         $this->stopwatch->start($eventName, self::CATEGORY);
@@ -51,10 +54,8 @@ final class StopwatchPlugin implements Plugin
 
     /**
      * Generates the event name.
-     *
-     * @return string
      */
-    private function getStopwatchEventName(RequestInterface $request)
+    private function getStopwatchEventName(RequestInterface $request): string
     {
         return sprintf('%s %s', $request->getMethod(), $request->getUri()->__toString());
     }
